@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="forms-container">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" name="name[]" value="" required>
+          <br><br>
+          <label for="name">Event:</label>
+          <input type="text" name="name[]" value="" required>
+          <button type="button" class="remove-form">Remove</button>
+          <br>
+          <br>
+        </div>
+      </div>
+      
+      <button type="button" id="add-form">Add Form</button>
+      
+      <script>
+        const addFormBtn = document.getElementById('add-form');
+        const formsContainer = document.getElementById('forms-container');
+
+        addFormBtn.addEventListener('click', function() 
+        {
+            const firstForm = document.querySelector('.form-group');
+            const clonedForm = firstForm.cloneNode(true);
+            formsContainer.appendChild(clonedForm);
+
+            const inputs = clonedForm.querySelectorAll('input');
+            inputs.forEach(function(input) {
+                input.value = '';
+            });
+
+            const removeFormBtns = document.querySelectorAll('.remove-form');
+            removeFormBtns.forEach(function(btn) 
+            {
+                btn.addEventListener('click', function() 
+                {
+                    const formGroup = btn.closest('.form-group');
+                    formGroup.remove();
+                });
+            });
+
+            const myForm = document.getElementById('.form-group');
+            myForm.addEventListener('submit', function(event) 
+            {
+                event.preventDefault();
+            });
+        });
+
+      </script>
+</body>
+</html>
